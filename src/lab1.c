@@ -7,7 +7,7 @@ void matrix_columns_sum(int **matrix, int *sums, int rows, int cols);
 
 void print_array(const int *array, int size);
 
-int main(void) {
+void lab1() {
     int rows, cols;
 
     printf("Enter number of rows: \n");
