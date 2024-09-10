@@ -12,11 +12,11 @@ typedef struct CircularLinkedList {
     int size;
 } CircularLinkedList;
 
-void addNode(CircularLinkedList *list, int data);
+void circular_list_add_node(CircularLinkedList *list, int data);
 
-void display(const CircularLinkedList *list);
+void circular_list_display(const CircularLinkedList *list);
 
-void removeNode(CircularLinkedList *list);
+void circular_list_remove_node(CircularLinkedList *list);
 
 CircularLinkedList *newCircularLinkedList();
 

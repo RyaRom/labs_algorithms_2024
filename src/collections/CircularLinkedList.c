@@ -11,7 +11,7 @@ CircularLinkedList *newCircularLinkedList() {
     return newCircularLinkedList;
 }
 
-void addNode(CircularLinkedList *list, const int data) {
+void circular_list_add_node(CircularLinkedList *list, const int data) {
     if (list == NULL) return;
     const int size = list->size;
 
@@ -34,7 +34,7 @@ void addNode(CircularLinkedList *list, const int data) {
     list->size++;
 }
 
-void display(const CircularLinkedList *list) {
+void circular_list_display(const CircularLinkedList *list) {
     if (list == NULL) return;
     const int size = list->size;
     const Node *current = list->head;
@@ -45,7 +45,7 @@ void display(const CircularLinkedList *list) {
     printf("\n");
 }
 
-void removeNode(CircularLinkedList *list) {
+void circular_list_remove_node(CircularLinkedList *list) {
     if (list == NULL || list->size == 0) return;
     if (list->size == 1) {
         list->head = NULL;
