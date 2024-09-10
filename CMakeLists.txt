@@ -9,4 +9,6 @@ include_directories(src)
 add_executable(Suai_labs_algorithms_2024
         src/lab1.c
         src/lab2.c
-        src/main.c)
+        src/main.c
+        src/collections/CircularLinkedList.c
+        src/collections/CircularLinkedList.h)
