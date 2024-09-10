@@ -4,7 +4,7 @@ project(Suai_labs_algorithms_2024 C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
-include_directories(lab1)
+include_directories(src)
 
 add_executable(Suai_labs_algorithms_2024
-    lab1/main.c)
+        src/lab1.c)
