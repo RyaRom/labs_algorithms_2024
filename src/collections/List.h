@@ -21,5 +21,7 @@ void list_display(const List *list);
 
 ListNode *getTail(const List *list);
 
+void list_remove_node(List *list, int data);
+
 List *newList();
 #endif //LINKEDLIST_H

@@ -53,3 +53,36 @@ ListNode *getTail(const List *list) {
     }
     return current;
 }
+
+void list_remove_node(List *list, int data) {
+    if (list == NULL || list->size == 0) return;
+    if (list->size == 1 && list->head->data == data) {
+        list->head = NULL;
+        list->size = 0;
+        return;
+    }
+
+    ListNode *head = list->head;
+    if (head->data == data) {
+        list->head = head->next;
+        free(head);
+        list->size--;
+        return;
+    }
+
+    ListNode *current = head;
+    ListNode *next = head->next;
+    while (next != NULL) {
+        ListNode *newNext = next->next;
+        if (next->data == data) {
+            if (newNext != NULL) {
+                current->next = newNext;
+            }
+            free(next);
+        }
+        current = next;
+        next = newNext;
+    }
+
+    list->size--;
+}

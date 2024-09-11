@@ -45,7 +45,7 @@ void circular_list_display(const CircularLinkedList *list) {
     printf("\n");
 }
 
-void circular_list_remove_node(CircularLinkedList *list) {
+void circular_list_remove_last(CircularLinkedList *list) {
     if (list == NULL || list->size == 0) return;
     if (list->size == 1) {
         list->head = NULL;
@@ -60,6 +60,43 @@ void circular_list_remove_node(CircularLinkedList *list) {
     head->previous = newTail;
     newTail->next = head;
     free(tail);
+
+    list->size--;
+}
+
+void circular_list_remove_internal(const CircularLinkedList *list, Node *current) {
+    if (list == NULL || current == NULL) return;
+    Node *previous = current->previous;
+    Node *next = current->next;
+    previous->next = next;
+    next->previous = previous;
+    free(current);
+}
+
+void circular_list_remove_node(CircularLinkedList *list, int data) {
+    if (list == NULL || list->size == 0) return;
+    if (list->size == 1 && list->head->data == data) {
+        list->head = NULL;
+        list->size = 0;
+        return;
+    }
+
+    Node *head = list->head;
+    if (head->data == data) {
+        list->head = head->next;
+        circular_list_remove_internal(list, head);
+        list->size--;
+        return;
+    }
+
+    Node *current = head->next;
+    for (int i = 0; i < list->size; i++) {
+        if (current->data == data) {
+            circular_list_remove_internal(list, current);
+            break;
+        }
+        current = current->next;
+    }
 
     list->size--;
 }

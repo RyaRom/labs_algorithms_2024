@@ -16,7 +16,9 @@ void circular_list_add_node(CircularLinkedList *list, int data);
 
 void circular_list_display(const CircularLinkedList *list);
 
-void circular_list_remove_node(CircularLinkedList *list);
+void circular_list_remove_last(CircularLinkedList *list);
+
+void circular_list_remove_node(CircularLinkedList *list, int data);
 
 CircularLinkedList *newCircularLinkedList();
 
