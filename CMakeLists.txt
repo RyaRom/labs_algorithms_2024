@@ -20,4 +20,6 @@ add_executable(Suai_labs_algorithms_2024
         src/collections/AbstractList.h
         src/lab3.c
         src/collections/Stack.c
-        src/collections/Stack.h)
+        src/collections/Stack.h
+        src/collections/queue.c
+        src/collections/queue.h)
