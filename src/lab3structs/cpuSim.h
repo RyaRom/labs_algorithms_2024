@@ -18,5 +18,9 @@ typedef struct CPU {
 
 CPU *newCpu();
 
-int cpuCycle(Task *task, int currentCycle);
+Task *newTask();
+
+int cpu_cycle(Task *task, int currentCycle, CPU *cpu);
+
+void cpu_display(const CPU *cpu);
 #endif //CPUSIM_H
