@@ -21,7 +21,7 @@ Stack *newStack() {
 }
 
 void stack_push(Stack *stack, void *data) {
-    StackNode *newNode = malloc(sizeof StackNode);
+    StackNode *newNode = malloc(sizeof (StackNode));
     if (newNode == NULL) {
         printf("Memory allocation failed\n");
         return;
@@ -48,6 +48,6 @@ void *stack_peek(const Stack *stack) {
 }
 
 int stack_is_empty(const Stack *stack) {
-    if (stack == NULL || stack->size == 0) return 0;
-    return 1;
+    if (stack == NULL || stack->size == 0) return 1;
+    return 0;
 }

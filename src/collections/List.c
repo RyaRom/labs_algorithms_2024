@@ -25,8 +25,8 @@ List *newList() {
 }
 
 int list_is_empty(const List *list) {
-    if (list == NULL || list->size == 0) return 0;
-    return 1;
+    if (list == NULL || list->size == 0) return 1;
+    return 0;
 }
 
 void list_add_node(List *list, int data) {
