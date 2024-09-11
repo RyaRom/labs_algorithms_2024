@@ -4,6 +4,7 @@
 
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
+#include "Collection.h"
 
 typedef struct ListNode {
     int data;
@@ -13,6 +14,7 @@ typedef struct ListNode {
 typedef struct List {
     ListNode *head;
     int size;
+    Collection collection;
 } List;
 
 void list_add_node(List *list, int data);

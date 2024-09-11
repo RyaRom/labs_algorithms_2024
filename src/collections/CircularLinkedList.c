@@ -8,6 +8,13 @@ CircularLinkedList *newCircularLinkedList() {
     if (newCircularLinkedList == NULL) exit(EXIT_FAILURE);
     newCircularLinkedList->head = NULL;
     newCircularLinkedList->size = 0;
+
+    Collection *collection = &(newCircularLinkedList->collection);
+
+    collection->add_int_elem = (void *) circular_list_add_node;
+    collection->display = (void *) circular_list_display;
+    collection->remove_int_elem = (void *) circular_list_remove_node;
+    collection->get_int_elem = (void *) circular_list_get;
     return newCircularLinkedList;
 }
 

@@ -7,11 +7,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Collection.h"
+
 List *newList() {
     List *list = malloc(sizeof(List));
     if (list == NULL) exit(EXIT_FAILURE);
     list->head = NULL;
     list->size = 0;
+
+    Collection *collection = &(list->collection);
+
+    collection->add_int_elem = (void *) list_add_node;
+    collection->display = (void *) list_display;
+    collection->remove_int_elem = (void *) list_remove_node;
+    collection->get_int_elem = (void *) list_get;
     return list;
 }
 

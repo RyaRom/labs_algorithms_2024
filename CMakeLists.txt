@@ -13,4 +13,8 @@ add_executable(Suai_labs_algorithms_2024
         src/collections/CircularLinkedList.c
         src/collections/CircularLinkedList.h
         src/collections/List.c
-        src/collections/List.h)
+        src/collections/List.h
+        src/utils/Scanner.c
+        src/utils/Scanner.h
+        src/collections/Collection.c
+        src/collections/Collection.h)
