@@ -1,6 +1,6 @@
 #ifndef CIRCULARLINKEDLIST_H
 #define CIRCULARLINKEDLIST_H
-#include "Collection.h"
+#include "AbstractList.h"
 
 typedef struct Node {
     int data;
@@ -11,7 +11,7 @@ typedef struct Node {
 typedef struct CircularLinkedList {
     Node *head;
     int size;
-    Collection collection;
+    AbstractList abstract_list;
 } CircularLinkedList;
 
 void circular_list_add_node(CircularLinkedList *list, int data);

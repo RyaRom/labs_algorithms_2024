@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Collection.h"
+#include "AbstractList.h"
 
 List *newList() {
     List *list = malloc(sizeof(List));
@@ -15,12 +15,12 @@ List *newList() {
     list->head = NULL;
     list->size = 0;
 
-    Collection *collection = &(list->collection);
+    AbstractList *abstract_list = &(list->abstract_list);
 
-    collection->add_int_elem = (void *) list_add_node;
-    collection->display = (void *) list_display;
-    collection->remove_int_elem = (void *) list_remove_node;
-    collection->get_int_elem = (void *) list_get;
+    abstract_list->add_int_elem = list_add_node;
+    abstract_list->display = list_display;
+    abstract_list->remove_int_elem = list_remove_node;
+    abstract_list->get_int_elem = list_get;
     return list;
 }
 

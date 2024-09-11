@@ -9,12 +9,12 @@ CircularLinkedList *newCircularLinkedList() {
     newCircularLinkedList->head = NULL;
     newCircularLinkedList->size = 0;
 
-    Collection *collection = &(newCircularLinkedList->collection);
+    AbstractList *list = &(newCircularLinkedList->abstract_list);
 
-    collection->add_int_elem = (void *) circular_list_add_node;
-    collection->display = (void *) circular_list_display;
-    collection->remove_int_elem = (void *) circular_list_remove_node;
-    collection->get_int_elem = (void *) circular_list_get;
+    list->add_int_elem = circular_list_add_node;
+    list->display = circular_list_display;
+    list->remove_int_elem = circular_list_remove_node;
+    list->get_int_elem = circular_list_get;
     return newCircularLinkedList;
 }
 

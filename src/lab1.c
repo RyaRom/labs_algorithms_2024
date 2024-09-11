@@ -19,7 +19,7 @@ void lab1() {
     int *row_sum = malloc(sizeof(int) * cols);
     if (matrix == NULL || row_sum == NULL) {
         perror("Failed to allocate memory");
-        return 1;
+        return;
     }
 
     read_matrix(matrix, cols, rows);
