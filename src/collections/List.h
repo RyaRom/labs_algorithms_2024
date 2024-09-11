@@ -23,5 +23,7 @@ ListNode *getTail(const List *list);
 
 void list_remove_node(List *list, int data);
 
+ListNode *list_get(const List *list, int data);
+
 List *newList();
 #endif //LINKEDLIST_H

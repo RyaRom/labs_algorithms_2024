@@ -100,3 +100,15 @@ void circular_list_remove_node(CircularLinkedList *list, int data) {
 
     list->size--;
 }
+
+Node *circular_list_get(const CircularLinkedList *list, int data) {
+    if (list == NULL || list->size == 0) return NULL;
+    Node *current = list->head;
+    for (int i = 0; i < list->size; i++) {
+        if (current->data == data) {
+            return current;
+        }
+        current = current->next;
+    }
+    return NULL;
+}

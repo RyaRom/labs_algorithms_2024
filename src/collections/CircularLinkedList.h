@@ -20,6 +20,8 @@ void circular_list_remove_last(CircularLinkedList *list);
 
 void circular_list_remove_node(CircularLinkedList *list, int data);
 
-CircularLinkedList *newCircularLinkedList();
+Node* circular_list_get (const CircularLinkedList *list, int data);
+
+CircularLinkedList* newCircularLinkedList();
 
 #endif //CIRCULARLINKEDLIST_H

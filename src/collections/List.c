@@ -86,3 +86,15 @@ void list_remove_node(List *list, int data) {
 
     list->size--;
 }
+
+ListNode *list_get(const List *list, int data) {
+    if (list == NULL || list->size == 0) return NULL;
+    ListNode *current = list->head;
+    while (current != NULL) {
+        if (current->data == data) {
+            return current;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
