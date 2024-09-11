@@ -28,5 +28,6 @@ void queue_free(Queue *queue);
 
 int queue_is_empty(const Queue *queue);
 
+void queue_display_tasks(const Queue *queue);
 
 #endif //QUEUE_H

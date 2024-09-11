@@ -7,8 +7,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Stack.h"
+#include "lab3structs/cpuSim.h"
+
 Queue *newQueue() {
     Queue *queue = malloc(sizeof(Queue));
+    if (queue == NULL) {
+        printf("Memory allocation failed\n");
+        return NULL;
+    }
     queue->top = NULL;
     queue->bottom = NULL;
     queue->size = 0;
@@ -62,4 +69,14 @@ void queue_free(Queue *queue) {
 int queue_is_empty(const Queue *queue) {
     if (queue == NULL || queue->size == 0) return 1;
     return 0;
+}
+
+void queue_display_tasks(const Queue *queue) {
+    if (queue_is_empty(queue)) return;
+    const QueueNode *current = queue->top;
+    while (current != NULL) {
+        const Task *task = current->value;
+        printf("Task ID: %d, Task time: %d, Duration time: %d\n", task->taskId, task->taskTime, task->durationTime);
+        current = current->next;
+    }
 }

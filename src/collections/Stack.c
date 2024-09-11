@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "lab3structs/cpuSim.h"
+
 
 Stack *newStack() {
     Stack *stack = malloc(sizeof(Stack));
@@ -57,4 +59,14 @@ void stack_free(Stack *stack) {
         stack_pop(stack);
     }
     free(stack);
+}
+
+void stack_display_tasks(const Stack *stack) {
+    if (stack_is_empty(stack)) return;
+    const StackNode *current = stack->top;
+    while (current != NULL) {
+        const Task *task = current->value;
+        printf("Task ID: %d, Task time: %d, Duration time: %d\n", task->taskId, task->taskTime, task->durationTime);
+        current = current->next;
+    }
 }

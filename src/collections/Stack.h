@@ -27,4 +27,6 @@ int stack_is_empty(const Stack *stack);
 
 void stack_free(Stack *stack);
 
+void stack_display_tasks(const Stack *stack);
+
 #endif //STACK_H
