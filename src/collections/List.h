@@ -28,4 +28,6 @@ void list_remove_node(List *list, int data);
 ListNode *list_get(const List *list, int data);
 
 List *newList();
+
+int list_is_empty(const List *list);
 #endif //LINKEDLIST_H

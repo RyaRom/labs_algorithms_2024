@@ -6,7 +6,7 @@
 #include "collections/List.h"
 #include "utils/Scanner.h"
 
-void collect_sum(List *collector, const CircularLinkedList *list, const int lim);
+void collect_sum(List *collector, const CircularLinkedList *list, int lim);
 
 void lab2() {
     CircularLinkedList *list = newCircularLinkedList();

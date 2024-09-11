@@ -24,6 +24,11 @@ List *newList() {
     return list;
 }
 
+int list_is_empty(const List *list) {
+    if (list == NULL || list->size == 0) return 0;
+    return 1;
+}
+
 void list_add_node(List *list, int data) {
     if (list == NULL) return;
     ListNode *newNode = malloc(sizeof(ListNode));
@@ -43,7 +48,7 @@ void list_add_node(List *list, int data) {
 }
 
 void list_display(const List *list) {
-    if (list == NULL) return;
+    if (list_is_empty(list)) return;
     const int size = list->size;
     const ListNode *current = list->head;
     for (int i = 0; i < size; ++i) {
@@ -54,17 +59,17 @@ void list_display(const List *list) {
 }
 
 ListNode *getTail(const List *list) {
-    if (list == NULL) return NULL;
+    if (list_is_empty(list)) return NULL;
     const int size = list->size;
-    const ListNode *current = list->head;
+    ListNode *current = list->head;
     for (int i = 0; i < size - 1; ++i) {
         current = current->next;
     }
     return current;
 }
 
-void list_remove_node(List *list, int data) {
-    if (list == NULL || list->size == 0) return;
+void list_remove_node(List *list, const int data) {
+    if (list_is_empty(list)) return;
     if (list->size == 1 && list->head->data == data) {
         list->head = NULL;
         list->size = 0;
@@ -97,7 +102,7 @@ void list_remove_node(List *list, int data) {
 }
 
 ListNode *list_get(const List *list, int data) {
-    if (list == NULL || list->size == 0) return NULL;
+    if (list_is_empty(list)) return NULL;
     ListNode *current = list->head;
     while (current != NULL) {
         if (current->data == data) {

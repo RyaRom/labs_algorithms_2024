@@ -17,4 +17,7 @@ add_executable(Suai_labs_algorithms_2024
         src/utils/Scanner.c
         src/utils/Scanner.h
         src/collections/AbstractList.c
-        src/collections/AbstractList.h)
+        src/collections/AbstractList.h
+        src/lab3.c
+        src/collections/Stack.c
+        src/collections/Stack.h)
