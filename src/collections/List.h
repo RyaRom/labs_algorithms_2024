@@ -29,5 +29,7 @@ ListNode *list_get(const List *list, int data);
 
 List *newList();
 
+void list_free(List *list);
+
 int list_is_empty(const List *list);
 #endif //LINKEDLIST_H

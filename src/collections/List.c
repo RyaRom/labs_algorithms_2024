@@ -24,6 +24,19 @@ List *newList() {
     return list;
 }
 
+void list_free(List *list) {
+    if (list_is_empty(list)) return;
+
+    ListNode *current = list->head;
+    while (current != NULL) {
+        ListNode *next = current->next;
+        free(current);
+        current = next;
+    }
+
+    free(list);
+}
+
 int list_is_empty(const List *list) {
     if (list == NULL || list->size == 0) return 1;
     return 0;

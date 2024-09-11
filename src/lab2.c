@@ -21,6 +21,9 @@ void lab2() {
 
     collect_sum(collector, list, k);
     list_display(collector);
+
+    list_free(collector);
+    circular_list_free(list);
 }
 
 void collect_sum(List *collector, const CircularLinkedList *list, const int lim) {
