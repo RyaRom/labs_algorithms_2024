@@ -119,3 +119,13 @@ Node *circular_list_get(const CircularLinkedList *list, int data) {
     }
     return NULL;
 }
+
+Node *circular_list_get_first(const CircularLinkedList *list) {
+    if (list == NULL || list->size == 0) return NULL;
+    return list->head;
+}
+
+Node *circular_list_get_next(const CircularLinkedList *list, Node *current) {
+    if (list == NULL || current == NULL) return NULL;
+    return current->next;
+}
