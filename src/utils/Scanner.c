@@ -33,7 +33,7 @@ void read_int_sequence_stdin(const AbstractList *list, void *collection) {
     if (list == NULL || collection == NULL) return;
     char *str;
     do {
-        printf("Enter sequence element (enter \"exit\" to exit program; enter \"zero\" to add 0):\n");
+        printf("Enter sequence element (enter \"stop\" to stop; enter \"zero\" to add 0):\n");
         str = read_line_stdin(100);
 
         if (str == NULL) {
@@ -50,7 +50,7 @@ void read_int_sequence_stdin(const AbstractList *list, void *collection) {
         if (data != 0) {
             list->add_int_elem(collection, data);
         }
-    } while (strcmp("exit", str) != 0);
+    } while (strcmp("stop", str) != 0);
     free(str);
 }
 
