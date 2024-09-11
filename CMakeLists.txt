@@ -22,4 +22,8 @@ add_executable(Suai_labs_algorithms_2024
         src/collections/Stack.c
         src/collections/Stack.h
         src/collections/queue.c
-        src/collections/queue.h)
+        src/collections/queue.h
+        src/utils/Random.c
+        src/utils/Random.h
+        src/lab3structs/cpuSim.c
+        src/lab3structs/cpuSim.h)
