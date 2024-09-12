@@ -40,17 +40,17 @@ void generateTasks(Queue *taskQueue, const int count) {
 void simulateCpu(Queue *taskQueue, Stack *taskStack, CPU *cpu1, CPU *cpu2) {
     Queue *finished = newQueue();
     int cycle = 1;
-    while (!queue_is_empty(taskQueue)) {
+    while (!queue_is_empty(taskQueue) || cpu1->currentTask != NULL || cpu2->currentTask != NULL || !stack_is_empty(taskStack)) {
         print_current_cycle(taskQueue, taskStack, cpu1, cpu2, cycle, finished);
         //push new task to P1 if it's empty
         Task *taskFromCpu1 = newTask();
         const int append_to_cpu1 = cpu_cycle(taskFromCpu1, cycle, cpu1);
-        if (append_to_cpu1 == 1) {
+        if (append_to_cpu1 == 1 && !queue_is_empty(taskQueue)) {
             Task *task = queue_dequeue(taskQueue);
             task->taskTime = cycle;
             cpu1->currentTask = task;
             stack_push(taskStack, taskFromCpu1);
-        } else if (append_to_cpu1 == 2) {
+        } else if (append_to_cpu1 == 2 && !queue_is_empty(taskQueue)) {
             Task *task = queue_dequeue(taskQueue);
             task->taskTime = cycle;
             cpu1->currentTask = task;
@@ -91,5 +91,5 @@ void print_current_cycle(const Queue *taskQueue, const Stack *taskStack, const C
     printf("finished: \n\n\n");
     queue_display_tasks(finished);
 
-    Sleep(2000);
+    // Sleep(2000);
 }

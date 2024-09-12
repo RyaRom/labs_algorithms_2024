@@ -7,7 +7,7 @@ void matrix_columns_sum(int **matrix, int *sums, int rows, int cols);
 
 void print_array(const int *array, int size);
 
-void print_matrix(const int **matrix, const int rows, const int cols);
+void print_matrix(const int **matrix, int rows, int cols);
 
 void lab1() {
     int rows, cols;
