@@ -23,6 +23,11 @@ void lab3() {
     generateTasks(taskQueue, 10);
 
     simulateCpu(taskQueue, taskStack, cpu1, cpu2);
+
+    free(cpu1);
+    free(cpu2);
+    stack_free(taskStack);
+    queue_free(taskQueue);
 }
 
 void generateTasks(Queue *taskQueue, const int count) {
@@ -40,7 +45,8 @@ void generateTasks(Queue *taskQueue, const int count) {
 void simulateCpu(Queue *taskQueue, Stack *taskStack, CPU *cpu1, CPU *cpu2) {
     Queue *finished = newQueue();
     int cycle = 1;
-    while (!queue_is_empty(taskQueue) || cpu1->currentTask != NULL || cpu2->currentTask != NULL || !stack_is_empty(taskStack)) {
+    while (!queue_is_empty(taskQueue) || cpu1->currentTask != NULL || cpu2->currentTask != NULL || !
+           stack_is_empty(taskStack)) {
         print_current_cycle(taskQueue, taskStack, cpu1, cpu2, cycle, finished);
         //push new task to P1 if it's empty
         Task *taskFromCpu1 = newTask();
