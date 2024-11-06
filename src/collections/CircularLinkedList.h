@@ -6,10 +6,10 @@ typedef struct Node {
     int data;
     struct Node *next;
     struct Node *previous;
-} Node;
+} CircularNode;
 
 typedef struct CircularLinkedList {
-    Node *head;
+    CircularNode *head;
     int size;
     AbstractList abstract_list;
 } CircularLinkedList;
@@ -22,11 +22,11 @@ void circular_list_remove_last(CircularLinkedList *list);
 
 void circular_list_remove_node(CircularLinkedList *list, int data);
 
-Node *circular_list_get(const CircularLinkedList *list, int data);
+CircularNode *circular_list_get(const CircularLinkedList *list, int data);
 
-Node *circular_list_get_first(const CircularLinkedList *list);
+CircularNode *circular_list_get_first(const CircularLinkedList *list);
 
-Node *circular_list_get_next(const CircularLinkedList *list, const Node *current);
+CircularNode *circular_list_get_next(const CircularLinkedList *list, const CircularNode *current);
 
 int circular_list_is_empty(const CircularLinkedList *list);
 

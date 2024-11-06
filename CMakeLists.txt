@@ -26,4 +26,8 @@ add_executable(Suai_labs_algorithms_2024
         src/utils/Random.c
         src/utils/Random.h
         src/lab3structs/cpuSim.c
-        src/lab3structs/cpuSim.h)
+        src/lab3structs/cpuSim.h
+        src/lab4.c
+        src/collections/HashTable.c
+        src/collections/HashTable.h
+        src/utils/Types.h)

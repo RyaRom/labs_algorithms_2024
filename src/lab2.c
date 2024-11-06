@@ -30,7 +30,7 @@ void lab2() {
 }
 
 void collect_sum(List *collector, const CircularLinkedList *list, const int lim) {
-    Node *current = circular_list_get_first(list);
+    CircularNode *current = circular_list_get_first(list);
     if (current == NULL) return;
     int sum = 0;
     while (sum < lim) {

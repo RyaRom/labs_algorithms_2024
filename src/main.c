@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void lab1();
 
@@ -29,8 +30,8 @@ int main(void) {
             break;
         case 3: lab3();
             break;
-        // case 4: lab4();
-        //     break;
+        case 4: lab4();
+            break;
         // case 5: lab5();
         //     break;
         // case 6: lab6();
