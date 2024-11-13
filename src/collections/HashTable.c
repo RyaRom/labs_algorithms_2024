@@ -1,11 +1,14 @@
 #include "HashTable.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <utils/Types.h>
 static const HashEntry _REMOVED = {NULL, NULL};
 
-int _simple_hash(char *str);
+uint32_t _DJB2_hash(const char *s);
+
+int _KR_v2_hash(const char *s);
 
 int _get_index_from_key(KeyType *key, HashTable *table);
 
@@ -49,15 +52,25 @@ int _get_last_free_index_from_key(KeyType *key, HashTable *table) {
     return _get_index_from_key(key, table);
 }
 
-int _simple_hash(char *str) {
-    unsigned int hash = 0;
-    while (*str) {
-        hash = hash * 31 + *str;
-        str++;
+uint32_t _DJB2_hash(const char *s) {
+    const uint8_t *str = (uint8_t *) s;
+    uint32_t hash = 5381;
+    uint8_t c;
+
+    while ((c = *str++)) {
+        hash = ((hash << 5) + hash) + c;
     }
+
     return hash;
 }
 
+int _KR_v2_hash(const char *s) {
+    int hash_val = 0;
+    for (hash_val = 0; *s != '\0'; s++) {
+        hash_val = *s + 33 * hash_val;
+    }
+    return abs(hash_val);
+}
 
 void _hashtable_overflow(HashTable *table) {
     const int old_size = table->segments;
@@ -82,8 +95,8 @@ void _hashtable_overflow(HashTable *table) {
 
 HashTable *new_hash_table() {
     HashTable *new_hash_table = malloc(sizeof(HashTable));
-    new_hash_table->hash_func_1 = _simple_hash;
-    new_hash_table->hash_func_2 = _simple_hash;
+    new_hash_table->hash_func_1 = _KR_v2_hash;
+    new_hash_table->hash_func_2 = _DJB2_hash;
     new_hash_table->segments = _INIT_SEGMENTS;
     new_hash_table->nodes = calloc(new_hash_table->segments, sizeof(HashEntry *));
     return new_hash_table;
@@ -154,4 +167,23 @@ bool hashtable_contains_key(HashTable *table, KeyType *key) {
         return false;
     }
     return true;
+}
+
+void hashtable_export_to_csv(const HashTable *table, const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        perror("File error");
+        return;
+    }
+
+    fprintf(file, "Key,Value\n");
+
+    for (int i = 0; i < table->segments; ++i) {
+        const HashEntry *entry = table->nodes[i];
+        if (entry != NULL && entry->value != NULL && entry != &_REMOVED) {
+            fprintf(file, "%s,%d\n", (char *) entry->key, *entry->value);
+        }
+    }
+
+    fclose(file);
 }

@@ -45,5 +45,7 @@ void hashtable_clear(HashTable *table);
 
 void hashtable_print(const HashTable *table);
 
+void hashtable_export_to_csv(const HashTable *table, const char *filename);
+
 
 #endif //HASHTABLE_H
