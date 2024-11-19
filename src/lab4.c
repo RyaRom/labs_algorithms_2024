@@ -18,7 +18,7 @@ void lab4() {
     check_collisions();
 
     HashTable *table = new_hash_table();
-    hashtable_put(table);
+
 }
 
 void check_collisions() {

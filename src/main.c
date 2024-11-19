@@ -32,8 +32,8 @@ int main(void) {
             break;
         case 4: lab4();
             break;
-        // case 5: lab5();
-        //     break;
+        case 5: lab5();
+            break;
         // case 6: lab6();
         //     break;
         default: return 0;
