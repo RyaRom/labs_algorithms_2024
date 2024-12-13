@@ -32,4 +32,6 @@ add_executable(Suai_labs_algorithms_2024
         src/collections/HashTable.h
         src/utils/Types.h
         src/collections/HashTable.c
-        src/lab5.c)
+        src/lab5.c
+        src/lab6.c
+        src/lab7.c)

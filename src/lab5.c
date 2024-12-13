@@ -56,9 +56,9 @@ void test_array_sort(const int size) {
     free(arr_random);
     free(arr_sorted);
     free(arr_unsorted);
-    printf("\n Time: %lld ms for %d elem for random array\n", time_for_random, size);
-    printf("\n Time: %lld ms for %d elem for sorted array\n", time_for_sorted, size);
-    printf("\n Time: %lld ms for %d elem for reversed sorted array\n", time_for_unsorted, size);
+    printf("\n Time: %lld ms for %d elem in random array\n", time_for_random, size);
+    printf("\n Time: %lld ms for %d elem in sorted array\n", time_for_sorted, size);
+    printf("\n Time: %lld ms for %d elem in reversed sorted array\n", time_for_unsorted, size);
 }
 
 type *create_random_array(int size, int min, int max) {
@@ -89,7 +89,7 @@ type *create_unsorted_array(int size) {
 
 
 void lab5() {
-    test_array_sort(1e3);
+    test_array_sort(1e4);
 
     printf("\n Swaps : %d", swaps);
     printf("\n Compares : %d", compares);
@@ -110,7 +110,7 @@ int get_by_val(type val, type *arr, int size) {
     int left = 0;
     int right = size - 1;
     while (right >= left) {
-        int mid = (left + right) >> 2;
+        int mid = (left + right) >> 1;
         if (arr[mid] == val) {
             return mid;
         }
@@ -164,6 +164,7 @@ void comb_sort(type *arr, const int size) {
 void swap(type *arr, int i, int j) {
     swaps++;
     const int temp = arr[i];
+
     arr[i] = arr[j];
     arr[j] = temp;
 }
