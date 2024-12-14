@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-// Definition of an AVL tree node
 typedef struct AVLNode {
     int key;
     struct AVLNode *left;
@@ -10,43 +8,48 @@ typedef struct AVLNode {
     int height;
 } AVLNode;
 
-// Function prototypes
-AVLNode* createNode(int key);
-int height(AVLNode* node);
-int getBalance(AVLNode* node);
-AVLNode* rightRotate(AVLNode* y);
-AVLNode* leftRotate(AVLNode* x);
-AVLNode* insert(AVLNode* node, int key);
-AVLNode* deleteNode(AVLNode* root, int key);
-void breadthFirstTraversal(AVLNode* root, int* arr, int* size);
-void printTree(AVLNode* root, int level);
-void removeOddNodes(AVLNode** root);
+AVLNode *createNode(int key);
 
-// Main function
+int height(AVLNode *node);
+
+int getBalance(AVLNode *node);
+
+AVLNode *rightRotate(AVLNode *y);
+
+AVLNode *leftRotate(AVLNode *x);
+
+AVLNode *insert(AVLNode *node, int key);
+
+AVLNode *deleteNode(AVLNode *root, int key);
+
+void printTree(AVLNode *root, int level);
+
+void collectBreadthFirst(AVLNode *root, int *arr, int *size, int *levels);
+
+AVLNode *rebuildTree(int *arr, int size);
+
+void removeOddLevelNodesCyclic(AVLNode **root);
+
 void lab6() {
-    AVLNode* root = NULL;
-    int elements[] = {1, 2, 3, 4, 5, 6, 7}; // Example input
+    AVLNode *root = NULL;
+    int elements[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     int n = sizeof(elements) / sizeof(elements[0]);
 
-    // Insert elements into the AVL tree
     for (int i = 0; i < n; i++) {
         root = insert(root, elements[i]);
     }
 
-    // Perform cyclic removal of odd nodes
     while (root && (root->left || root->right)) {
         printf("Current Tree:\n");
         printTree(root, 0);
-        removeOddNodes(&root);
+        removeOddLevelNodesCyclic(&root);
     }
 
     printf("Final remaining node: %d\n", root ? root->key : -1);
-    return 0;
 }
 
-// Utility functions
-AVLNode* createNode(int key) {
-    AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
+AVLNode *createNode(int key) {
+    AVLNode *node = (AVLNode *) malloc(sizeof(AVLNode));
     node->key = key;
     node->left = NULL;
     node->right = NULL;
@@ -54,17 +57,17 @@ AVLNode* createNode(int key) {
     return node;
 }
 
-int height(AVLNode* node) {
+int height(AVLNode *node) {
     return node ? node->height : 0;
 }
 
-int getBalance(AVLNode* node) {
+int getBalance(AVLNode *node) {
     return node ? height(node->left) - height(node->right) : 0;
 }
 
-AVLNode* rightRotate(AVLNode* y) {
-    AVLNode* x = y->left;
-    AVLNode* T2 = x->right;
+AVLNode *rightRotate(AVLNode *y) {
+    AVLNode *x = y->left;
+    AVLNode *T2 = x->right;
 
     x->right = y;
     y->left = T2;
@@ -75,9 +78,9 @@ AVLNode* rightRotate(AVLNode* y) {
     return x;
 }
 
-AVLNode* leftRotate(AVLNode* x) {
-    AVLNode* y = x->right;
-    AVLNode* T2 = y->left;
+AVLNode *leftRotate(AVLNode *x) {
+    AVLNode *y = x->right;
+    AVLNode *T2 = y->left;
 
     y->left = x;
     x->right = T2;
@@ -88,7 +91,7 @@ AVLNode* leftRotate(AVLNode* x) {
     return y;
 }
 
-AVLNode* insert(AVLNode* node, int key) {
+AVLNode *insert(AVLNode *node, int key) {
     if (!node) return createNode(key);
 
     if (key < node->key) {
@@ -96,7 +99,7 @@ AVLNode* insert(AVLNode* node, int key) {
     } else if (key > node->key) {
         node->right = insert(node->right, key);
     } else {
-        return node; // No duplicate keys allowed
+        return node;
     }
 
     node->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
@@ -121,7 +124,7 @@ AVLNode* insert(AVLNode* node, int key) {
     return node;
 }
 
-AVLNode* deleteNode(AVLNode* root, int key) {
+AVLNode *deleteNode(AVLNode *root, int key) {
     if (!root) return root;
 
     if (key < root->key) {
@@ -130,11 +133,11 @@ AVLNode* deleteNode(AVLNode* root, int key) {
         root->right = deleteNode(root->right, key);
     } else {
         if (!root->left || !root->right) {
-            AVLNode* temp = root->left ? root->left : root->right;
+            AVLNode *temp = root->left ? root->left : root->right;
             free(root);
             return temp;
         } else {
-            AVLNode* temp = root->right;
+            AVLNode *temp = root->right;
             while (temp->left) temp = temp->left;
             root->key = temp->key;
             root->right = deleteNode(root->right, temp->key);
@@ -163,24 +166,7 @@ AVLNode* deleteNode(AVLNode* root, int key) {
     return root;
 }
 
-void breadthFirstTraversal(AVLNode* root, int* arr, int* size) {
-    if (!root) return;
-
-    AVLNode* queue[100];
-    int front = 0, rear = 0;
-
-    queue[rear++] = root;
-
-    while (front < rear) {
-        AVLNode* current = queue[front++];
-        arr[(*size)++] = current->key;
-
-        if (current->left) queue[rear++] = current->left;
-        if (current->right) queue[rear++] = current->right;
-    }
-}
-
-void printTree(AVLNode* root, int level) {
+void printTree(AVLNode *root, int level) {
     if (root) {
         printTree(root->right, level + 1);
         for (int i = 0; i < level; i++) printf("    ");
@@ -189,16 +175,59 @@ void printTree(AVLNode* root, int level) {
     }
 }
 
-void removeOddNodes(AVLNode** root) {
+void collectBreadthFirst(AVLNode *root, int *arr, int *size, int *levels) {
+    if (!root) return;
+
+    AVLNode *queue[100];
+    int levelQueue[100];
+    int front = 0, rear = 0;
+
+    queue[rear] = root;
+    levelQueue[rear++] = 1;
+
+    while (front < rear) {
+        AVLNode *current = queue[front];
+        int level = levelQueue[front++];
+
+        arr[*size] = current->key;
+        levels[(*size)++] = level;
+
+        if (current->left) {
+            queue[rear] = current->left;
+            levelQueue[rear++] = level + 1;
+        }
+        if (current->right) {
+            queue[rear] = current->right;
+            levelQueue[rear++] = level + 1;
+        }
+    }
+}
+
+AVLNode *rebuildTree(int *arr, int size) {
+    AVLNode *newRoot = NULL;
+    for (int i = 0; i < size; i++) {
+        newRoot = insert(newRoot, arr[i]);
+    }
+    return newRoot;
+}
+
+void removeOddLevelNodesCyclic(AVLNode **root) {
     if (!*root) return;
 
     int arr[100];
+    int levels[100];
     int size = 0;
-    breadthFirstTraversal(*root, arr, &size);
+
+    collectBreadthFirst(*root, arr, &size, levels);
+
+    int newArr[100];
+    int newSize = 0;
 
     for (int i = 0; i < size; i++) {
-        if (arr[i] % 2 != 0) {
-            *root = deleteNode(*root, arr[i]);
+        if (levels[i] % 2 == 0) {
+            newArr[newSize++] = arr[i];
         }
     }
+
+    *root = rebuildTree(newArr, newSize);
 }

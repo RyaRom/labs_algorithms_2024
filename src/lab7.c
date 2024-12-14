@@ -79,7 +79,7 @@ bool canDivideIntoTeams(Graph *graph, int teams_count) {
         return false;
     }
 
-    int maxTeamSize = (n + teams_count - 1) / teams_count;
+    int maxTeamSize = (n + teams_count + 1) / teams_count;
     int teams = findMinimumTeams(graph, maxTeamSize);
     return teams <= teams_count;
 }
@@ -97,7 +97,7 @@ void lab7() {
     addEdge(&graph, 3, 4);
     addEdge(&graph, 4, 5);
 
-    int maxTeamSize = (n + m) / m;
+    int maxTeamSize = (n + m + 1) / m;
     int minTeams = findMinimumTeams(&graph, maxTeamSize);
     printf("Minimum number of teams: %d\n", minTeams);
 
